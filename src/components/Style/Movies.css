@@ -1,0 +1,17 @@
+.showMovies {
+  background-color: #0f4c5c;
+  height: 3.5rem;
+  width: 20rem;
+  z-index: 1;
+  border: none;
+  margin: 1rem;
+  border-radius: 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.showMovies:hover {
+  border: 1px solid white;
+  transition: 0.5s;
+}

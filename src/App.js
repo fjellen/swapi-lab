@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Movies from './components/Movies';
+import React, { useState, useEffect} from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 
 function App() {
+
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      async function getMovies() {
+        let res = await fetch("https://swapi.py4e.com/api/films/");
+        let data = await res.json();
+        setMovies(data.results);
+        setLoading(false)
+      }
+      getMovies();
+    }, 3000)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className='wrapper'>
+      
+
+  <div>
+      {loading && (<Spinner animation="border" variant="danger" />)}
+      {movies.map((movie) => (
+        <Movies key={movie.id} movie={movie} />
+      ))}
+      </div>
     </div>
+    </>
   );
 }
 
